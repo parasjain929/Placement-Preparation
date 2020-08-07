@@ -5,7 +5,7 @@
  {
  	int n;
  	cin>>n;
- 	int nums[n+1];
+ 	int nums[n];
  	for(int i=0;i<n;i++)
  	{
  		cin>>nums[i];
@@ -23,6 +23,6 @@
             slow=nums[slow];
             fast=nums[fast];
         }
-        cout<<slow;
+        cout<<fast;
 
  }
