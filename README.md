@@ -1,2 +1,7 @@
-# Placement-Preparation
-A full 30 Days plan of Questions For FAANG Preparation / Competetive Programming
+<html>
+<body>
+<ol> 
+	<li>Day1</li>
+	</ol>
+</body>
+<html>
