@@ -1,4 +1,4 @@
-//Reverse a linked list
+//Detect a Y in a linked list
 #include<bits/stdc++.h>
 using namespace std;
 class node{
@@ -45,6 +45,53 @@ void Reverse(node **headptr)
     }
     *headptr=prev;
 }
+int getCount(node *head)
+{
+    node*current=head;
+    int count=0;
+    while(current!=NULL)
+    {
+        count++;
+        current=current->next;
+    }
+    return count;
+}
+int getintersect(int d,node *head1,node *head2)
+{
+    node *current1=head1;
+    node *current2=head2;
+    for(i=0;i<d;i++)
+    {
+        if(current1==NULL)
+        {
+            return -1;
+        }
+        current1=current1-->next;
+    }
+    while(current1!=NULL && current2!=NULL)
+    {
+        if(current1==current2)
+            return current1->data;
+        current1=current1->next;
+        current2=current2->next;
+    }
+    return -1;
+}
+int getintersectionNode(node*head1, node *head2)
+{
+    int c1=getCount(head1);
+    int c2=getCount(head2);
+    int d;
+    if(c1>c2)
+    {
+        d=c1-c2;
+    }
+    else{
+        d=c2-c1;
+    }
+    return getintersect(d,head1,head2);
+}
+
 int main()
 {
         int n,v;

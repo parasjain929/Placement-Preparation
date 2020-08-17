@@ -1,4 +1,4 @@
-//Reverse a linked list
+//Detect a Cycle and remove Loop in a linked list
 #include<bits/stdc++.h>
 using namespace std;
 class node{
@@ -33,18 +33,46 @@ void print(node *head)
         print=print->next;
     }
 }
-void Reverse(node **headptr)
+void RemoveLoop(node *loopnode,node *headptr)
 {
-    node *prev=NULL,*current = *headptr,*right=(*headptr)->next;
-    while(current!=NULL)
-    {
-        right=current->next;
-        current->next=prev;
-        prev=current;
-        current=right;
+    node *ptr1=loopnode;
+    node *ptr2=loopnode;
+    unsigned int k=1,i;
+    while(ptr1->next!=ptr2){
+        ptr1=ptr1->next;
+        k++;
     }
-    *headptr=prev;
+    ptr1=head;
+    ptr2=head;
+    for(int i=0;i<k;i++)
+    {
+        ptr2=ptr2->next;
+    }
+    while(ptr2!=ptr1){
+        ptr1=ptr1->next;
+        ptr2=ptr2->next;
+    }
+    while(ptr2->next!=ptr1)
+        ptr2=ptr2->next;
+    ptr2->next=NULL;
 }
+
+int detectAndRemoveLoop(node*head)
+{
+    node *slow_ptr=head;
+    node *fast_ptr=head;
+    while(slow_ptr && fast_ptr && fast_ptr->next){
+        slow_ptr=slow_ptr->next;
+        fast_ptr=fast_ptr->next->next;
+        if(slow_ptr==fast_ptr){
+            cout<<"Cycle detected";
+            RemoveLoop(slow_ptr,head);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main()
 {
         int n,v;

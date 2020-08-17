@@ -1,4 +1,4 @@
-//Reverse a linked list
+//Rotate a linked list 
 #include<bits/stdc++.h>
 using namespace std;
 class node{
@@ -33,17 +33,23 @@ void print(node *head)
         print=print->next;
     }
 }
-void Reverse(node **headptr)
+void Rotate(node **headptr,int k)
 {
-    node *prev=NULL,*current = *headptr,*right=(*headptr)->next;
-    while(current!=NULL)
+    if(k==0)
+        return;
+    node *current=*headptr;
+    while(current->next!=NULL)
+        current=current->next;
+    current->next=*headptr;
+    current=*headptr;
+    for(int i=0;i<k-1;i++)
     {
-        right=current->next;
-        current->next=prev;
-        prev=current;
-        current=right;
+        current=current->next;
+
     }
-    *headptr=prev;
+    *headptr=current->next;
+    current->next=NULL;
+
 }
 int main()
 {
@@ -58,10 +64,13 @@ int main()
             insertlist(&head,v);
             n--;
         }
+        int k;
+        cout<<"Enter K";
+        cin>>k;
         cout<<"Entered List Is"<<endl;
         print(head);
-        Reverse(&head);
-        cout<<"Reverse List Is"<<endl;
+        Rotate(&head,k);
+        cout<<"Rotated List Is"<<endl;
         print(head);
 }
 
